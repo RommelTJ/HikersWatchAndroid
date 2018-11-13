@@ -12,4 +12,13 @@
         android:paddingBottom="0dp"
         tools:context="com.rommelrico.hikerswatch.MainActivity">
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/background"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/imageView"
+            android:scaleType="fitXY" />
+
 </RelativeLayout>
