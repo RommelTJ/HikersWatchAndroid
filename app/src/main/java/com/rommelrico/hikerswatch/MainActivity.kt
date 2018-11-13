@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             var address = "Could not find address"
-            val listAddresses = geocoder.getFromLocation(location?.latitude!!, location?.longitude!!, 1)
+            val listAddresses = geocoder.getFromLocation(location?.latitude!!, location.longitude, 1)
 
             if (listAddresses != null && listAddresses.size > 0) {
                 address = "Address: \n"
