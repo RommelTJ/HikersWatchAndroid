@@ -68,4 +68,16 @@
             android:textColor="@android:color/background_light"
             android:textSize="@dimen/activity_horizontal_margin" />
 
+    <TextView
+            android:text="Altitude:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/accTextView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:id="@+id/altTextView"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/activity_horizontal_margin" />
+
 </RelativeLayout>
