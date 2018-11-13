@@ -21,4 +21,15 @@
             android:id="@+id/imageView"
             android:scaleType="fitXY" />
 
+    <TextView
+            android:text="Hiker's Watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:id="@+id/textView"
+            android:textSize="24sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/background_dark" />
+
 </RelativeLayout>
