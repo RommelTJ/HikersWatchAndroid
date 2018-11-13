@@ -82,6 +82,14 @@ class MainActivity : AppCompatActivity() {
 
     } // end onCreate
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.isNotEmpty() && grantResults.get(0) == PackageManager.PERMISSION_GRANTED) {
+            startListening()
+        }
+    }
+
     fun startListening() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
