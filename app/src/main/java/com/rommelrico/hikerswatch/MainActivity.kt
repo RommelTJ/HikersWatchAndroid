@@ -3,12 +3,17 @@ package com.rommelrico.hikerswatch
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
+import android.widget.TextView
+import java.io.IOException
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +36,9 @@ class MainActivity : AppCompatActivity() {
              *
              * @param location The new location, as a Location object.
              */
-            override fun onLocationChanged(location: Location?) { }
+            override fun onLocationChanged(location: Location?) {
+                updateLocationInfo(location)
+            }
 
             /**
              * Called when the provider status changes. This method is called when
@@ -95,5 +102,55 @@ class MainActivity : AppCompatActivity() {
             locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }
     }
+
+    fun updateLocationInfo(location: Location?) {
+
+        val latTextView = findViewById<TextView>(R.id.latTextView)
+        val lonTextView = findViewById<TextView>(R.id.lonTextView)
+        val altTextView = findViewById<TextView>(R.id.altTextView)
+        val accTextView = findViewById<TextView>(R.id.accTextView)
+
+        latTextView.text = "Latitude: ${location?.latitude}"
+        lonTextView.text = "Longitude: ${location?.longitude}"
+        altTextView.text = "Altitude: ${location?.altitude}"
+        accTextView.text = "Accuracy: ${location?.accuracy}"
+
+        val geocoder = Geocoder(applicationContext, Locale.getDefault())
+
+        try {
+            var address = "Could not find address"
+            val listAddresses = geocoder.getFromLocation(location?.latitude!!, location?.longitude!!, 1)
+
+            if (listAddresses != null && listAddresses.size > 0) {
+                address = "Address: \n"
+
+                if (listAddresses[0].subThoroughfare != null) {
+                    address += listAddresses[0].subThoroughfare + " "
+                }
+
+                if (listAddresses[0].thoroughfare != null) {
+                    address += listAddresses[0].thoroughfare + "\n"
+                }
+
+                if (listAddresses[0].locality != null) {
+                    address += listAddresses[0].locality + "\n"
+                }
+
+                if (listAddresses[0].postalCode != null) {
+                    address += listAddresses[0].postalCode + "\n"
+                }
+
+                if (listAddresses[0].countryName != null) {
+                    address += listAddresses[0].countryName + "\n"
+                }
+
+            }
+
+            val addressTextView = findViewById<TextView>(R.id.addressTextView)
+            addressTextView.text = address
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    } // end updateLocation
 
 }
